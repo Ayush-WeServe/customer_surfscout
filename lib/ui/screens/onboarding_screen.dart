@@ -3,6 +3,15 @@ import 'package:customer_surfscout/ui/widgets/onBoarding_widget.dart';
 import 'package:customer_surfscout/utils/constants/images.dart';
 import 'package:customer_surfscout/utils/constants/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/constants/routes.dart';
+import '../../utils/constants/sizes.dart';
+import '../../utils/constants/styles.dart';
+import '../widgets/custom_elevated_button_widget.dart';
+import '../widgets/custom_outlined_button.dart';
+import '../widgets/text_widget.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -10,6 +19,24 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = OnboardingController.instance;
+    final List<Map<String, String>> onBoardingTexts = [
+      {
+        "title": AppStrings.onBoarding1Heading,
+        "subtitle": AppStrings.onBoarding1Text
+      },
+      {
+        "title": AppStrings.onBoarding2Heading,
+        "subtitle": AppStrings.onBoarding2Text
+      },
+      {
+        "title": AppStrings.onBoarding3Heading,
+        "subtitle": AppStrings.onBoarding3Text
+      },
+      {
+        "title": AppStrings.onBoarding4Heading,
+        "subtitle": AppStrings.onBoarding4Text
+      },
+    ];
     return Scaffold(
       body: Stack(
         children: [
@@ -37,99 +64,127 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ],
           ),
+          SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.paddingMD, vertical: AppSizes.paddingLG),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor:
+                              AppColors.tertiaryColor.withOpacity(0.2)),
+                      onPressed: () {
+                        controller.skippage();
+                      },
+                      child: TextWidget(
+                        text: AppStrings.skipBtn,
+                        style: AppStyles.onBoardingSkip,
+                      )),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                  ),
+                ),
+                Expanded(
+                  // flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.spacingXS,
+                        vertical: AppSizes.spacingMD),
+                    child: Obx(() {
+                      final currentIndex = controller.currentPageIndex.value;
+                      return Column(
+                        spacing: AppSizes.spacingXS,
+                        children: [
+                          TextWidget(
+                            text: onBoardingTexts[currentIndex]["title"]!,
+                            style: AppStyles.onBoardingHeading,
+                          ),
+                          TextWidget(
+                            text: onBoardingTexts[currentIndex]["subtitle"]!,
+                            style: AppStyles.labelSmall,
+                            softwrap: true,
+                            maxLine: 4,
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ),
+                Obx(() {
+                  return controller.currentPageIndex.value == 3
+                      ? Row(
+                          spacing: AppSizes.spacingXS,
+                          children: [
+                            Flexible(
+                              child: CustomOutlinedButton(
+                                text: AppStrings.signIn,
+                                onPressed: () {
+                                  Get.toNamed(AppRouteNames.loginScreen);
+                                },
+                              ),
+                            ),
+                            Flexible(
+                              child: CustomElevatedButton(
+                                text: AppStrings.signUp,
+                                onPressed: () {
+                                  Get.toNamed(AppRouteNames.signupScreen);
+                                },
+                              ),
+                            )
+                          ],
+                        )
+                      :
+                      // I N D I C A T O R
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SmoothPageIndicator(
+                              controller: controller.pageController,
+                              onDotClicked: controller.dotNavigationClick,
+                              count: 4,
+                              effect: ExpandingDotsEffect(
+                                  activeDotColor: AppColors.primaryColor,
+                                  dotHeight: 6,
+                                  dotWidth: 10),
+                            ),
+                            // P A G E   B T N
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    controller.previousPage();
+                                  },
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_left_outlined,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    controller.nextPage();
+                                  },
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_right_outlined,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                })
+              ],
+            ),
+          ))
         ],
       ),
     );
-    //   return Scaffold(
-    //     body: SafeArea(
-    //       child: OnBoardingSlider(
-    //         headerBackgroundColor: Colors.transparent,
-    //         finishButtonText: AppStrings.nextBtn,
-    //         finishButtonStyle: FinishButtonStyle(
-    //           backgroundColor: AppColors.primaryColor,
-    //         ),
-    //         onFinish: () {
-    //           Get.toNamed(AppRouteNames.auth);
-    //         },
-    //         background: [
-    //           Image.asset(
-    //             AppImages.onBoarding1,
-    //           ),
-    //           Image.asset(AppImages.onBoarding2),
-    //           Image.asset(AppImages.onBoarding3),
-    //         ],
-    //         totalPage: 3,
-    //         speed: 1.8,
-    //         pageBodies: [
-    //           Container(
-    //             color: AppColors.tertiaryColor.withOpacity(0.7),
-    //             padding: EdgeInsets.symmetric(horizontal: 40),
-    //             child: Column(
-    //               spacing: AppSizes.spacingXS,
-    //               children: <Widget>[
-    //                 SizedBox(
-    //                   height: 450,
-    //                 ),
-    //                 TextWidget(
-    //                   text: AppStrings.onBoarding1Heading,
-    //                   style: AppStyles.onBoardingHeading,
-    //                 ),
-    //                 TextWidget(
-    //                   text: AppStrings.onBoarding1Text,
-    //                   style: AppStyles.labelSmall,
-    //                   softwrap: true,
-    //                   maxLine: 4,
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             color: AppColors.tertiaryColor.withOpacity(0.7),
-    //             padding: EdgeInsets.symmetric(horizontal: 40),
-    //             child: Column(
-    //               spacing: AppSizes.spacingXS,
-    //               children: <Widget>[
-    //                 SizedBox(
-    //                   height: 450,
-    //                 ),
-    //                 TextWidget(
-    //                   text: AppStrings.onBoarding2Heading,
-    //                   style: AppStyles.onBoardingHeading,
-    //                 ),
-    //                 TextWidget(
-    //                   text: AppStrings.onBoarding2Text,
-    //                   style: AppStyles.labelSmall,
-    //                   softwrap: true,
-    //                   maxLine: 4,
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             color: AppColors.tertiaryColor.withOpacity(0.7),
-    //             padding: EdgeInsets.symmetric(horizontal: 40),
-    //             child: Column(
-    //               spacing: AppSizes.spacingXS,
-    //               children: <Widget>[
-    //                 SizedBox(
-    //                   height: 450,
-    //                 ),
-    //                 TextWidget(
-    //                   text: AppStrings.onBoarding3Heading,
-    //                   style: AppStyles.onBoardingHeading,
-    //                 ),
-    //                 TextWidget(
-    //                   text: AppStrings.onBoarding3Text,
-    //                   style: AppStyles.labelSmall,
-    //                   softwrap: true,
-    //                   maxLine: 4,
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
   }
 }

@@ -12,7 +12,7 @@ class OnboardingController extends GetxController {
   void dotNavigationClick(index) {
     currentPageIndex.value = index;
     pageController.animateToPage(index,
-        duration: Duration(seconds: 1), curve: Curves.linear);
+        duration: Duration(milliseconds: 500), curve: Curves.linear);
   }
 
   void nextPage() {
@@ -20,7 +20,7 @@ class OnboardingController extends GetxController {
     } else {
       int page = currentPageIndex.value + 1;
       pageController.animateToPage(page,
-          duration: Duration(seconds: 1), curve: Curves.linear);
+          duration: Duration(milliseconds: 500), curve: Curves.linear);
     }
   }
 
@@ -29,13 +29,13 @@ class OnboardingController extends GetxController {
     } else {
       int page = currentPageIndex.value - 1;
       pageController.animateToPage(page,
-          duration: Duration(seconds: 1), curve: Curves.linear);
+          duration: Duration(milliseconds: 500), curve: Curves.linear);
     }
   }
 
   void skippage() {
     currentPageIndex.value = 3;
     pageController.animateToPage(3,
-        duration: Duration(seconds: 1), curve: Curves.linear);
+        duration: Duration(milliseconds: 500), curve: Curves.linear);
   }
 }

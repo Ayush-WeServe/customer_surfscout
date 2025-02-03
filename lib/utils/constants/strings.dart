@@ -48,7 +48,7 @@ class AppStrings {
   static const String onBoarding3Heading = "More Than Just Rides";
   static const String onBoarding4Heading = "Ready to Ride?";
   static const String onBoarding1Text =
-      "Save on costs, reduce traffic, and travell efficiently.with simple ride requests, getting where you need to go has never been earlier.";
+      "Save on costs, reduce traffic, and travel efficiently.with simple ride requests, getting where you need to go has never been earlier.";
   static const String onBoarding2Text =
       "Request, accept or manage rides easily. Track your journey in real time and get instant updates on your ride's status.";
   static const String onBoarding3Text =
