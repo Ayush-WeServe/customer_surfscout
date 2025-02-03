@@ -10,6 +10,10 @@ class AppStrings {
   static const String getOTPButton = 'Get OTP';
   static const String verifyOTPButton = 'Verify OTP';
   static const String resendOTPButton = 'resend OTP';
+  static const String nextBtn = 'Next';
+  static const String signIn = 'Sign In';
+  static const String signUp = 'Sign Up';
+  static const String skipBtn = 'SKIP';
 
   // I N P U T F I E L D    H I N T S
   static const String enterDetails = 'Please enter your details';
@@ -38,6 +42,19 @@ class AppStrings {
   static const String setProfile = "Tap To Set Profile";
   static const String personal = "Personal";
   static const String address = "Address";
+
+  static const String onBoarding1Heading = "Effortless Ride Sharing";
+  static const String onBoarding2Heading = "Smart Ride Management";
+  static const String onBoarding3Heading = "More Than Just Rides";
+  static const String onBoarding4Heading = "Ready to Ride?";
+  static const String onBoarding1Text =
+      "Save on costs, reduce traffic, and travell efficiently.with simple ride requests, getting where you need to go has never been earlier.";
+  static const String onBoarding2Text =
+      "Request, accept or manage rides easily. Track your journey in real time and get instant updates on your ride's status.";
+  static const String onBoarding3Text =
+      "Carpool, deliver parcels, request towing. rent vehicles and much more! plus, multi-stop errands and round trips are now a breeze";
+  static const String onBoarding4Text =
+      "Sign in or create your account to begin your journey. join our community and start sharing or requesting rides with just a few taps.";
 
   // E R R O R    M E S S A G E S
   static const String error = "Error";

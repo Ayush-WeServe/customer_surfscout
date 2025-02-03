@@ -3,13 +3,13 @@ import '../../utils/constants/colors.dart';
 import '../../utils/constants/sizes.dart';
 import 'text_widget.dart';
 
-class CustomElevatedButton extends StatelessWidget {
+class CustomOutlinedButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final IconData? icon;
   final double width;
 
-  const CustomElevatedButton(
+  const CustomOutlinedButton(
       {super.key,
       required this.text,
       this.icon,
@@ -21,11 +21,14 @@ class CustomElevatedButton extends StatelessWidget {
     return SizedBox(
         height: AppSizes.buttonMD,
         width: width,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSizes.radiusMD)),
-                backgroundColor: AppColors.primaryColor),
+        child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.primaryColor,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1, color: AppColors.primaryColor),
+                borderRadius: BorderRadius.circular(AppSizes.radiusMD),
+              ),
+            ),
             onPressed: onPressed,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +47,7 @@ class CustomElevatedButton extends StatelessWidget {
                   text: text,
                   style: TextStyle(
                       fontSize: AppSizes.fontsBodyLarge,
-                      color: AppColors.scaffoldColor),
+                      color: AppColors.primaryColor),
                 ),
               ],
             )));

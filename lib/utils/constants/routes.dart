@@ -1,4 +1,6 @@
 import 'package:customer_surfscout/bindings/auth_binding.dart';
+import 'package:customer_surfscout/bindings/onBoarding_binding.dart';
+import 'package:customer_surfscout/ui/screens/authScreen.dart';
 import 'package:customer_surfscout/ui/screens/login_screen.dart';
 import 'package:customer_surfscout/ui/screens/onboarding_screen.dart';
 import 'package:customer_surfscout/ui/screens/sign_up_screen.dart';
@@ -10,7 +12,11 @@ class AppRoutes {
 
   static final routes = [
     GetPage(name: AppRouteNames.home, page: () => HomeScreen()),
-    GetPage(name: AppRouteNames.onBoarding, page: () => OnboardingScreen()),
+    GetPage(
+        name: AppRouteNames.onBoarding,
+        page: () => OnboardingScreen(),
+        binding: OnboardingBinding()),
+    GetPage(name: AppRouteNames.auth, page: () => Authscreen()),
     GetPage(
       name: AppRouteNames.loginScreen,
       page: () => LoginScreen(),
@@ -31,4 +37,5 @@ class AppRouteNames {
   static const String loginScreen = '/loginScreen';
   static const String signupScreen = '/signup_Screen';
   static const String onBoarding = '/onBoarding_srceen';
+  static const String auth = '/auth';
 }

@@ -1,3 +1,4 @@
+import 'package:customer_surfscout/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'sizes.dart';
 
@@ -55,4 +56,16 @@ class AppStyles {
       fontWeight: FontWeight.w400,
       fontSize: AppSizes.fontsLabelSmall,
       overflow: TextOverflow.ellipsis); // w100 (Thin)
+
+  static final TextStyle? onBoardingHeading = TextStyle(
+      fontWeight: FontWeight.w800,
+      fontSize: AppSizes.fontsBodyMedium,
+      color: AppColors.primaryColor,
+      overflow: TextOverflow.ellipsis);
+
+  static final TextStyle? onBoardingSkip = TextStyle(
+      fontWeight: FontWeight.w300,
+      fontSize: AppSizes.fontsBodySmall,
+      color: AppColors.primaryColor,
+      overflow: TextOverflow.ellipsis);
 }
