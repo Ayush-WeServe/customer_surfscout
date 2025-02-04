@@ -6,11 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../utils/constants/colors.dart';
-import '../../utils/constants/routes.dart';
 import '../../utils/constants/sizes.dart';
 import '../../utils/constants/styles.dart';
-import '../widgets/custom_elevated_button_widget.dart';
-import '../widgets/custom_outlined_button.dart';
 import '../widgets/text_widget.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -32,10 +29,6 @@ class OnboardingScreen extends StatelessWidget {
         "title": AppStrings.onBoarding3Heading,
         "subtitle": AppStrings.onBoarding3Text
       },
-      {
-        "title": AppStrings.onBoarding4Heading,
-        "subtitle": AppStrings.onBoarding4Text
-      },
     ];
     return Scaffold(
       body: Stack(
@@ -56,12 +49,6 @@ class OnboardingScreen extends StatelessWidget {
                   image: AppImages.onBoarding3,
                   title: AppStrings.onBoarding3Heading,
                   subTitle: AppStrings.onBoarding3Text),
-              OnboardingWidget(
-                image: AppImages.welcomePage,
-                title: AppStrings.onBoarding4Heading,
-                subTitle: AppStrings.onBoarding4Text,
-                authScreen: true,
-              ),
             ],
           ),
           SafeArea(
@@ -105,81 +92,58 @@ class OnboardingScreen extends StatelessWidget {
                           TextWidget(
                             text: onBoardingTexts[currentIndex]["title"]!,
                             style: AppStyles.onBoardingHeading,
+                            textAlign: TextAlign.justify,
                           ),
                           TextWidget(
                             text: onBoardingTexts[currentIndex]["subtitle"]!,
                             style: AppStyles.labelSmall,
                             softwrap: true,
                             maxLine: 4,
+                            textAlign: TextAlign.justify,
                           ),
                         ],
                       );
                     }),
                   ),
                 ),
-                Obx(() {
-                  return controller.currentPageIndex.value == 3
-                      ? Row(
-                          spacing: AppSizes.spacingXS,
-                          children: [
-                            Flexible(
-                              child: CustomOutlinedButton(
-                                text: AppStrings.signIn,
-                                onPressed: () {
-                                  Get.toNamed(AppRouteNames.loginScreen);
-                                },
-                              ),
-                            ),
-                            Flexible(
-                              child: CustomElevatedButton(
-                                text: AppStrings.signUp,
-                                onPressed: () {
-                                  Get.toNamed(AppRouteNames.signupScreen);
-                                },
-                              ),
-                            )
-                          ],
-                        )
-                      :
-                      // I N D I C A T O R
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SmoothPageIndicator(
-                              controller: controller.pageController,
-                              onDotClicked: controller.dotNavigationClick,
-                              count: 4,
-                              effect: ExpandingDotsEffect(
-                                  activeDotColor: AppColors.primaryColor,
-                                  dotHeight: 6,
-                                  dotWidth: 10),
-                            ),
-                            // P A G E   B T N
-                            Row(
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    controller.previousPage();
-                                  },
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_left_outlined,
-                                    color: AppColors.primaryColor,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    controller.nextPage();
-                                  },
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_right_outlined,
-                                    color: AppColors.primaryColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                })
+                // I N D I C A T O R
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SmoothPageIndicator(
+                      controller: controller.pageController,
+                      onDotClicked: controller.dotNavigationClick,
+                      count: 3,
+                      effect: ExpandingDotsEffect(
+                          activeDotColor: AppColors.primaryColor,
+                          dotHeight: 6,
+                          dotWidth: 10),
+                    ),
+                    // P A G E   B T N
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            controller.previousPage();
+                          },
+                          icon: Icon(
+                            Icons.keyboard_arrow_left_outlined,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            controller.nextPage();
+                          },
+                          icon: Icon(
+                            Icons.keyboard_arrow_right_outlined,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
           ))

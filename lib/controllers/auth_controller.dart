@@ -1,3 +1,4 @@
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:customer_surfscout/utils/constants/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class AuthController extends GetxController {
     final email = emailController.text.trim();
     final name = nameController.text.trim();
     final phone = phoneNumberController.text.trim();
+    String profile = imagePath.value;
 
     if (name.isEmpty) {
       SnackbarWidget().show(
@@ -92,6 +94,35 @@ class AuthController extends GetxController {
           context: Get.context!);
       return;
     }
+
+    if (profile.isNotEmpty) {
+      try {
+        final cloudinary = CloudinaryPublic('dt73y1ihf', 'ml_default');
+        final response = await cloudinary.uploadFile(CloudinaryFile.fromFile(
+          profile,
+          resourceType: CloudinaryResourceType.Auto,
+          folder: FirebaseAuth.instance.currentUser?.uid,
+        ));
+        profile = response.secureUrl;
+        print('profile' + profile);
+      } on PlatformException catch (e) {
+        print('Error has occured =============$e');
+        SnackbarWidget().show(
+            title: AppStrings.error,
+            message: AppPlatformExceptions(e.code).message,
+            context: Get.context!);
+      } catch (e) {
+        print('Error has occured in this =============$e');
+        SnackbarWidget().show(
+            title: AppStrings.error,
+            message: AppStrings.somethingWrong.tr,
+            context: Get.context!);
+      }
+    } else {
+      profile =
+          'https://res.cloudinary.com/dt73y1ihf/image/upload/v1736417289/user_profile_image_qybfnz.png';
+    }
+
     // S T O R E   D E T A I L S   I N   F I R E B A S E
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -105,11 +136,7 @@ class AuthController extends GetxController {
       await FirebaseFirestore.instance
           .collection(Appkeys.user)
           .doc(user.uid)
-          .set(UserModel(
-            name,
-            phone,
-            email,
-          ).toJson());
+          .set(UserModel(name, phone, email, profile).toJson());
       await sendOTP();
     } on FirebaseException catch (e) {
       SnackbarWidget().show(

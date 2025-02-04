@@ -1,3 +1,4 @@
+import 'package:customer_surfscout/utils/constants/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,8 @@ class OnboardingController extends GetxController {
   }
 
   void nextPage() {
-    if (currentPageIndex.value == 3) {
+    if (currentPageIndex.value == 2) {
+      Get.toNamed(AppRouteNames.auth);
     } else {
       int page = currentPageIndex.value + 1;
       pageController.animateToPage(page,
@@ -34,8 +36,10 @@ class OnboardingController extends GetxController {
   }
 
   void skippage() {
-    currentPageIndex.value = 3;
-    pageController.animateToPage(3,
-        duration: Duration(milliseconds: 500), curve: Curves.linear);
+    Get.toNamed(AppRouteNames.auth);
+  }
+
+  void back() {
+    Get.offAllNamed(AppRouteNames.onBoarding);
   }
 }

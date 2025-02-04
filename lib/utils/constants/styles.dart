@@ -66,6 +66,12 @@ class AppStyles {
   static final TextStyle? onBoardingSkip = TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: AppSizes.fontsBodySmall,
-      color: AppColors.primaryColor,
+      color: AppColors.textPrimary,
+      overflow: TextOverflow.ellipsis);
+
+  static final TextStyle? otpNote = TextStyle(
+      fontWeight: FontWeight.w200,
+      fontSize: AppSizes.fontsLabelMedium,
+      color: AppColors.textSecondary,
       overflow: TextOverflow.ellipsis);
 }

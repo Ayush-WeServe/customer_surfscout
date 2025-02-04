@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: AppSizes.paddingSM, vertical: AppSizes.paddingLG),
+                horizontal: AppSizes.paddingXS, vertical: AppSizes.paddingLG),
             child: Column(
               spacing: AppSizes.spacingMD,
               children: [
@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             maxLine: 3,
                             softwrap: true,
-                            style: AppStyles.labelSmall,
+                            style: AppStyles.otpNote,
                           ),
                         ),
                         Column(
@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 maxLine: 3,
                                 softwrap: true,
-                                style: AppStyles.labelSmall,
+                                style: AppStyles.otpNote,
                               ),
                             ),
                             // R E S E N D   O T P
