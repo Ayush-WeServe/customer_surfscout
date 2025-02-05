@@ -94,7 +94,6 @@ class AuthController extends GetxController {
           context: Get.context!);
       return;
     }
-
     if (profile.isNotEmpty) {
       try {
         final cloudinary = CloudinaryPublic('dt73y1ihf', 'ml_default');
